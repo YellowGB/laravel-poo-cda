@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      DB_DATABASE: cda-automatisation
+      DB_DATABASE: laravel
       DB_USER: root
       DB_PASSWORD: root
 
