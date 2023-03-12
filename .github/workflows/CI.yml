@@ -27,7 +27,7 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: /
+      run: |
         composer update -q --no-ansi --no-interaction --no-scripts --no-progress
         npm run build
     - name: Set up MySQL
