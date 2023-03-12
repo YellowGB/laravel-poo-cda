@@ -27,9 +27,7 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: |
-        composer update -q --no-ansi --no-interaction --no-scripts --no-progress
-        npm run build
+      run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
@@ -42,6 +40,8 @@ jobs:
       run: php artisan key:generate
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
+    - name: Build with node
+      run: npm run build
     - name: Run migrations and seed
       run: |
         php artisan migrate:fresh --seed
