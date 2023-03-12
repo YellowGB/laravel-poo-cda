@@ -31,6 +31,8 @@ jobs:
         composer update -q --no-ansi --no-interaction --no-scripts --no-progress
         npm install
         npm run build
+    - name: Grumphp tests
+      run: php ./vendor/bin/grumphp run
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start

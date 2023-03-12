@@ -1,0 +1,16 @@
+grumphp:
+    tasks:
+        git_commit_message:
+            allow_empty_message: false
+            enforce_capitalized_subject: false
+            enforce_no_subject_punctuations: false
+            enforce_no_subject_trailing_period: true
+            enforce_single_lined_subject: true
+            type_scope_conventions: []
+            max_body_width: 72
+            max_subject_width: 60
+            matchers:
+                Must start with the word trololo: trololo*
+            case_insensitive: false
+            multiline: true
+            additional_modifiers: ''
