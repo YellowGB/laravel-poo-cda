@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ClassRoomController;
 use App\Http\Controllers\Api\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,8 @@ Route::middleware([
         [StudentController::class, 'index'],
     )->name('students.index');
 });
+
+Route::get(
+    '/classrooms',
+    [ClassRoomController::class, 'index'],
+)->name('classrooms.index');
