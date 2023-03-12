@@ -2,12 +2,29 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentTest extends TestCase
 {
+    public function test_user_is_redirected_when_trying_to_access_students_index_page_unauthenticated(): void
+    {
+        $response = $this->get('/students');
+
+        $response->assertStatus(302);
+    }
+
+    public function test_index_page_can_be_rendered_with_an_unauthenticated_user(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $response = $this->get('/students');
+
+        $response->assertStatus(200);
+    }
+
     /**
      * A test when everything is correct
      */

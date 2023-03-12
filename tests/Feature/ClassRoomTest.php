@@ -8,9 +8,13 @@ use Tests\TestCase;
 
 class ClassRoomTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    public function test_classrooms_index_page_can_be_rendered(): void
+    {
+        $response = $this->get('/classrooms');
+
+        $response->assertStatus(200);
+    }
+
     public function test_new_classroom_is_stored_correctly(): void
     {
         $name = fake()->city();
