@@ -2,13 +2,15 @@ name: CI
 
 on:
   push:
+    branches: [ "workflows" ]
+  pull_request:
     branches: [ "main" ]
 
 jobs:
-  ci-tests:
+  laravel-tests:
 
     runs-on: ubuntu-latest
-
+    
     env:
       DB_DATABASE: laravel
       DB_USER: root
@@ -19,16 +21,10 @@ jobs:
       with:
         php-version: '8.1'
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: |
-        composer update -q --no-ansi --no-interaction --no-scripts --no-progress
-        npm install
-        npm run build
+      run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress
     - name: Set up MySQL
       run: |
         sudo /etc/init.d/mysql start
@@ -42,6 +38,7 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Run migrations and seed
-      run: php artisan migrate:fresh --seed
-    - name: Execute tests via PHPUnit
+      run: |
+        php artisan migrate:fresh --seed
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
