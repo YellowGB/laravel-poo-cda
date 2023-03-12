@@ -24,7 +24,6 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-        cache: vite
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
