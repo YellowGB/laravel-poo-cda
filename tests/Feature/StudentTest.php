@@ -9,17 +9,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentTest extends TestCase
 {
-    public function test_user_is_redirected_when_trying_to_access_students_index_page_unauthenticated(): void
+    public function test_user_is_redirected_when_trying_to_access_students_page_unauthenticated(): void
     {
         $response = $this->get('/students');
 
         $response->assertStatus(302);
+        $response->assertRedirect('/login');
     }
 
-    public function test_index_page_can_be_rendered_with_an_unauthenticated_user(): void
+    public function test_page_is_rendered_when_unauthenticated(): void
     {
-        $this->actingAs($user = User::factory()->create());
-
+        $this->actingAs(User::factory()->create());
         $response = $this->get('/students');
 
         $response->assertStatus(200);
