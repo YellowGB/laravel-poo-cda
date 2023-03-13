@@ -7,11 +7,11 @@ on:
 jobs:
   ci-tests:
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     env:
       DB_DATABASE: laravel
-      DB_USERNAME: root
+      DB_USER: root
       DB_PASSWORD: root
 
     steps:
